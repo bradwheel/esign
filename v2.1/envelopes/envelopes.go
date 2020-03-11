@@ -376,7 +376,7 @@ func (op *ConsumerDisclosuresGetDefaultOp) LangCode(val string) *ConsumerDisclos
 	return op
 }
 
-// CustomFieldsCreate updates envelope custom fields for an envelope.
+// CustomFieldsCreate creates envelope custom fields for an envelope.
 //
 // https://developers.docusign.com/esign-rest-api/reference/envelopes/envelopecustomfields/create
 //
@@ -1067,7 +1067,7 @@ func (op *FormDataGetOp) Do(ctx context.Context) (*model.EnvelopeFormData, error
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// LocksCreate lock an envelope.
+// LocksCreate locks an envelope.
 //
 // https://developers.docusign.com/esign-rest-api/reference/envelopes/envelopelocks/create
 //
@@ -1239,7 +1239,7 @@ func (op *RecipientTabsListOp) Do(ctx context.Context) (*model.Tabs, error) {
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// IncludeAnchorTabLocations when set to **true**, all tabs with anchor tab properties are included in the response. If you do not specify this parameter, the effect is the default behavior (**false**).
+// IncludeAnchorTabLocations when set to **true**, all tabs with anchor tab properties are included in the response. The default value is **false**.
 func (op *RecipientTabsListOp) IncludeAnchorTabLocations() *RecipientTabsListOp {
 	if op != nil {
 		op.QueryOpts.Set("include_anchor_tab_locations", "true")
@@ -1307,7 +1307,9 @@ func (op *RecipientsCreateOp) Do(ctx context.Context) (*model.Recipients, error)
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// ResendEnvelope when set to **true**, resends the   envelope if the new recipient's routing order is before or the same as the envelope's next recipient.
+// ResendEnvelope when set to **true**, resends the envelope to the recipients that you specify in the request body. You use this parameter to resend the envelope to a recipient who deleted the original email notification.
+//
+// **Note**: Correcting an envelope is a different process. DocuSign always resends an envelope when you correct it, regardless of the value that you enter here.
 func (op *RecipientsCreateOp) ResendEnvelope() *RecipientsCreateOp {
 	if op != nil {
 		op.QueryOpts.Set("resend_envelope", "true")
@@ -1461,7 +1463,9 @@ func (op *RecipientsUpdateOp) OfflineSigning(val string) *RecipientsUpdateOp {
 	return op
 }
 
-// ResendEnvelope when set to **true**, resends the   envelope if the new recipient's routing order is before or the same as the envelope's next recipient.
+// ResendEnvelope when set to **true**, resends the envelope to the recipients that you specify in the request body. You use this parameter to resend the envelope to a recipient who deleted the original email notification.
+//
+// **Note**: Correcting an envelope is a different process. DocuSign always resends an envelope when you correct it, regardless of the value that you enter here.
 func (op *RecipientsUpdateOp) ResendEnvelope() *RecipientsUpdateOp {
 	if op != nil {
 		op.QueryOpts.Set("resend_envelope", "true")
@@ -2531,7 +2535,7 @@ func (op *ListStatusChangesOp) Include(val string) *ListStatusChangesOp {
 	return op
 }
 
-// IncludePurgeInformation when **true**, information about envelopes that the sender has deleted are included in the response.
+// IncludePurgeInformation when set to **true**, information about envelopes that have been deleted is included in the response.
 func (op *ListStatusChangesOp) IncludePurgeInformation(val string) *ListStatusChangesOp {
 	if op != nil {
 		op.QueryOpts.Set("include_purge_information", val)
@@ -2605,6 +2609,14 @@ func (op *ListStatusChangesOp) Powerformids(val ...string) *ListStatusChangesOp 
 func (op *ListStatusChangesOp) QueryBudget(val string) *ListStatusChangesOp {
 	if op != nil {
 		op.QueryOpts.Set("query_budget", val)
+	}
+	return op
+}
+
+// RequesterDateFormat set the call query parameter requester_date_format
+func (op *ListStatusChangesOp) RequesterDateFormat(val string) *ListStatusChangesOp {
+	if op != nil {
+		op.QueryOpts.Set("requester_date_format", val)
 	}
 	return op
 }
@@ -2943,7 +2955,7 @@ func (op *NotaryJournalsListOp) Count(val string) *NotaryJournalsListOp {
 	return op
 }
 
-// SearchText set the call query parameter search_text
+// SearchText use this parameter to search for specific text.
 func (op *NotaryJournalsListOp) SearchText(val string) *NotaryJournalsListOp {
 	if op != nil {
 		op.QueryOpts.Set("search_text", val)
@@ -2959,9 +2971,11 @@ func (op *NotaryJournalsListOp) StartPosition(val string) *NotaryJournalsListOp 
 	return op
 }
 
-// ViewsCreateSharedRecipient is SDK Method Envelopes::createEnvelopeRecipientSharedView
+// ViewsCreateSharedRecipient returns a URL to the shared recipient view UI for an envelope.
 //
-// https://developers.docusign.com/esign/restapi/Envelopes/EnvelopeViews/createSharedRecipient
+// https://developers.docusign.com/esign-rest-api/reference/envelopes/envelopeviews/createsharedrecipient
+//
+// SDK Method Envelopes::createEnvelopeRecipientSharedView
 func (s *Service) ViewsCreateSharedRecipient(envelopeID string, recipientViewRequest *model.RecipientViewRequest) *ViewsCreateSharedRecipientOp {
 	return &ViewsCreateSharedRecipientOp{
 		Credential: s.credential,

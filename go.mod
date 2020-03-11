@@ -10,3 +10,5 @@ require (
 	golang.org/x/sys v0.0.0-20190726091711-fc99dfbffb4e // indirect
 	google.golang.org/grpc v1.22.1 // indirect
 )
+
+go 1.13

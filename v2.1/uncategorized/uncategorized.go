@@ -25,6 +25,7 @@ package uncategorized // import "github.com/jfcote87/esign/v2.1/uncategorized"
 
 import (
 	"context"
+	"io"
 	"net/url"
 	"strings"
 
@@ -42,9 +43,362 @@ func New(cred esign.Credential) *Service {
 	return &Service{credential: cred}
 }
 
-// CommentsCreateEnvelopeCommentsis uncategorized and subject to change
-func (s *Service) CommentsCreateEnvelopeComments(envelopeID string, commentsPublish *model.CommentsPublish) *CommentsCreateEnvelopeCommentsOp {
-	return &CommentsCreateEnvelopeCommentsOp{
+// AccountsGetEnvelopePurgeConfiguration gets the envelope purge configuration for an account.
+// operation is uncategorized and subject to change.
+func (s *Service) AccountsGetEnvelopePurgeConfiguration() *AccountsGetEnvelopePurgeConfigurationOp {
+	return &AccountsGetEnvelopePurgeConfigurationOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       "settings/envelope_purge_configuration",
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// AccountsGetEnvelopePurgeConfigurationOp implements DocuSign API SDK Uncategorized::getEnvelopePurgeConfiguration
+type AccountsGetEnvelopePurgeConfigurationOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *AccountsGetEnvelopePurgeConfigurationOp) Do(ctx context.Context) (*model.EnvelopePurgeConfiguration, error) {
+	var res *model.EnvelopePurgeConfiguration
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// AccountsGetNotificationDefaults gets envelope notification defaults.
+// operation is uncategorized and subject to change.
+func (s *Service) AccountsGetNotificationDefaults() *AccountsGetNotificationDefaultsOp {
+	return &AccountsGetNotificationDefaultsOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       "settings/notification_defaults",
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// AccountsGetNotificationDefaultsOp implements DocuSign API SDK Uncategorized::getNotificationDefaults
+type AccountsGetNotificationDefaultsOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *AccountsGetNotificationDefaultsOp) Do(ctx context.Context) (*model.NotificationDefaults, error) {
+	var res *model.NotificationDefaults
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// AccountsUpdateEnvelopePurgeConfiguration sets the envelope purge configuration for an account.
+// operation is uncategorized and subject to change.
+func (s *Service) AccountsUpdateEnvelopePurgeConfiguration(envelopePurgeConfiguration *model.EnvelopePurgeConfiguration) *AccountsUpdateEnvelopePurgeConfigurationOp {
+	return &AccountsUpdateEnvelopePurgeConfigurationOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       "settings/envelope_purge_configuration",
+		Payload:    envelopePurgeConfiguration,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// AccountsUpdateEnvelopePurgeConfigurationOp implements DocuSign API SDK Uncategorized::updateEnvelopePurgeConfiguration
+type AccountsUpdateEnvelopePurgeConfigurationOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *AccountsUpdateEnvelopePurgeConfigurationOp) Do(ctx context.Context) (*model.EnvelopePurgeConfiguration, error) {
+	var res *model.EnvelopePurgeConfiguration
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// AccountsUpdateNotificationDefaults updates envelope notification default settings.
+// operation is uncategorized and subject to change.
+func (s *Service) AccountsUpdateNotificationDefaults(notificationDefaults *model.NotificationDefaults) *AccountsUpdateNotificationDefaultsOp {
+	return &AccountsUpdateNotificationDefaultsOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       "settings/notification_defaults",
+		Payload:    notificationDefaults,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// AccountsUpdateNotificationDefaultsOp implements DocuSign API SDK Uncategorized::updateNotificationDefaults
+type AccountsUpdateNotificationDefaultsOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *AccountsUpdateNotificationDefaultsOp) Do(ctx context.Context) (*model.NotificationDefaults, error) {
+	var res *model.NotificationDefaults
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// BCCEmailArchiveCreate creates a BCC email archive configuration.
+// operation is uncategorized and subject to change.
+func (s *Service) BCCEmailArchiveCreate(bccEmailArchive *model.BccEmailArchive) *BCCEmailArchiveCreateOp {
+	return &BCCEmailArchiveCreateOp{
+		Credential: s.credential,
+		Method:     "POST",
+		Path:       "settings/bcc_email_archives",
+		Payload:    bccEmailArchive,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BCCEmailArchiveCreateOp implements DocuSign API SDK Uncategorized::create
+type BCCEmailArchiveCreateOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BCCEmailArchiveCreateOp) Do(ctx context.Context) (*model.BccEmailArchive, error) {
+	var res *model.BccEmailArchive
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// BCCEmailArchiveDelete deletes a BCC email archive configuration.
+// operation is uncategorized and subject to change.
+func (s *Service) BCCEmailArchiveDelete(bccEmailArchiveID string) *BCCEmailArchiveDeleteOp {
+	return &BCCEmailArchiveDeleteOp{
+		Credential: s.credential,
+		Method:     "DELETE",
+		Path:       strings.Join([]string{"settings", "bcc_email_archives", bccEmailArchiveID}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BCCEmailArchiveDeleteOp implements DocuSign API SDK Uncategorized::delete
+type BCCEmailArchiveDeleteOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BCCEmailArchiveDeleteOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
+}
+
+// BCCEmailArchiveGet gets a BCC email archive configuration and its history.
+// operation is uncategorized and subject to change.
+func (s *Service) BCCEmailArchiveGet(bccEmailArchiveID string) *BCCEmailArchiveGetOp {
+	return &BCCEmailArchiveGetOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       strings.Join([]string{"settings", "bcc_email_archives", bccEmailArchiveID}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BCCEmailArchiveGetOp implements DocuSign API SDK Uncategorized::get
+type BCCEmailArchiveGetOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BCCEmailArchiveGetOp) Do(ctx context.Context) (*model.BccEmailArchiveHistoryList, error) {
+	var res *model.BccEmailArchiveHistoryList
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// Count (Optional) The maximum number of results (changes) to return.
+func (op *BCCEmailArchiveGetOp) Count(val string) *BCCEmailArchiveGetOp {
+	if op != nil {
+		op.QueryOpts.Set("count", val)
+	}
+	return op
+}
+
+// StartPosition (Optional) The index position within the total result set from which to start returning values. The default value is `0`.
+func (op *BCCEmailArchiveGetOp) StartPosition(val string) *BCCEmailArchiveGetOp {
+	if op != nil {
+		op.QueryOpts.Set("start_position", val)
+	}
+	return op
+}
+
+// BCCEmailArchiveList gets the BCC email archive configurations for an account.
+// operation is uncategorized and subject to change.
+func (s *Service) BCCEmailArchiveList() *BCCEmailArchiveListOp {
+	return &BCCEmailArchiveListOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       "settings/bcc_email_archives",
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BCCEmailArchiveListOp implements DocuSign API SDK Uncategorized::list
+type BCCEmailArchiveListOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BCCEmailArchiveListOp) Do(ctx context.Context) (*model.BccEmailArchiveList, error) {
+	var res *model.BccEmailArchiveList
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// Count (Optional) The maximum number of results to return.
+func (op *BCCEmailArchiveListOp) Count(val string) *BCCEmailArchiveListOp {
+	if op != nil {
+		op.QueryOpts.Set("count", val)
+	}
+	return op
+}
+
+// StartPosition (Optional) The index position within the total result set from which to start returning values. The default value is `0`.
+func (op *BCCEmailArchiveListOp) StartPosition(val string) *BCCEmailArchiveListOp {
+	if op != nil {
+		op.QueryOpts.Set("start_position", val)
+	}
+	return op
+}
+
+// BulkSendCreateBulkSendList creates a bulk send list
+// operation is uncategorized and subject to change.
+func (s *Service) BulkSendCreateBulkSendList(bulkSend *model.BulkSendingList) *BulkSendCreateBulkSendListOp {
+	return &BulkSendCreateBulkSendListOp{
+		Credential: s.credential,
+		Method:     "POST",
+		Path:       "bulk_send_lists",
+		Payload:    bulkSend,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BulkSendCreateBulkSendListOp implements DocuSign API SDK Uncategorized::createBulkSendList
+type BulkSendCreateBulkSendListOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BulkSendCreateBulkSendListOp) Do(ctx context.Context) (*model.BulkSendingList, error) {
+	var res *model.BulkSendingList
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// BulkSendCreateBulkSendRequest creates a bulk send request
+// operation is uncategorized and subject to change.
+func (s *Service) BulkSendCreateBulkSendRequest(bulkSendListID string, bulkSendRequest *model.BulkSendRequest) *BulkSendCreateBulkSendRequestOp {
+	return &BulkSendCreateBulkSendRequestOp{
+		Credential: s.credential,
+		Method:     "POST",
+		Path:       strings.Join([]string{"bulk_send_lists", bulkSendListID, "send"}, "/"),
+		Payload:    bulkSendRequest,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BulkSendCreateBulkSendRequestOp implements DocuSign API SDK Uncategorized::createBulkSendRequest
+type BulkSendCreateBulkSendRequestOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BulkSendCreateBulkSendRequestOp) Do(ctx context.Context) (*model.BulkSendResponse, error) {
+	var res *model.BulkSendResponse
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// BulkSendCreateBulkSendTestRequest creates a bulk send test
+// operation is uncategorized and subject to change.
+func (s *Service) BulkSendCreateBulkSendTestRequest(bulkSendListID string, bulkSendRequest *model.BulkSendRequest) *BulkSendCreateBulkSendTestRequestOp {
+	return &BulkSendCreateBulkSendTestRequestOp{
+		Credential: s.credential,
+		Method:     "POST",
+		Path:       strings.Join([]string{"bulk_send_lists", bulkSendListID, "test"}, "/"),
+		Payload:    bulkSendRequest,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BulkSendCreateBulkSendTestRequestOp implements DocuSign API SDK Uncategorized::createBulkSendTestRequest
+type BulkSendCreateBulkSendTestRequestOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BulkSendCreateBulkSendTestRequestOp) Do(ctx context.Context) (*model.BulkSendTestResponse, error) {
+	var res *model.BulkSendTestResponse
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// BulkSendDeleteBulkSendList deletes a bulk send list
+// operation is uncategorized and subject to change.
+func (s *Service) BulkSendDeleteBulkSendList(bulkSendListID string) *BulkSendDeleteBulkSendListOp {
+	return &BulkSendDeleteBulkSendListOp{
+		Credential: s.credential,
+		Method:     "DELETE",
+		Path:       strings.Join([]string{"bulk_send_lists", bulkSendListID}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BulkSendDeleteBulkSendListOp implements DocuSign API SDK Uncategorized::deleteBulkSendList
+type BulkSendDeleteBulkSendListOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BulkSendDeleteBulkSendListOp) Do(ctx context.Context) (*model.BulkSendingListSummaries, error) {
+	var res *model.BulkSendingListSummaries
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// BulkSendGetBulkSendList gets a specific bulk send list
+// operation is uncategorized and subject to change.
+func (s *Service) BulkSendGetBulkSendList(bulkSendListID string) *BulkSendGetBulkSendListOp {
+	return &BulkSendGetBulkSendListOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       strings.Join([]string{"bulk_send_lists", bulkSendListID}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BulkSendGetBulkSendListOp implements DocuSign API SDK Uncategorized::getBulkSendList
+type BulkSendGetBulkSendListOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BulkSendGetBulkSendListOp) Do(ctx context.Context) (*model.BulkSendingList, error) {
+	var res *model.BulkSendingList
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// BulkSendGetBulkSendLists gets bulk send lists
+// operation is uncategorized and subject to change.
+func (s *Service) BulkSendGetBulkSendLists() *BulkSendGetBulkSendListsOp {
+	return &BulkSendGetBulkSendListsOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       "bulk_send_lists",
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BulkSendGetBulkSendListsOp implements DocuSign API SDK Uncategorized::getBulkSendLists
+type BulkSendGetBulkSendListsOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BulkSendGetBulkSendListsOp) Do(ctx context.Context) (*model.BulkSendingListSummaries, error) {
+	var res *model.BulkSendingListSummaries
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// BulkSendUpdateBulkSendList updates a bulk send list
+// operation is uncategorized and subject to change.
+func (s *Service) BulkSendUpdateBulkSendList(bulkSendListID string, bulkSend *model.BulkSendingList) *BulkSendUpdateBulkSendListOp {
+	return &BulkSendUpdateBulkSendListOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       strings.Join([]string{"bulk_send_lists", bulkSendListID}, "/"),
+		Payload:    bulkSend,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// BulkSendUpdateBulkSendListOp implements DocuSign API SDK Uncategorized::updateBulkSendList
+type BulkSendUpdateBulkSendListOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *BulkSendUpdateBulkSendListOp) Do(ctx context.Context) (*model.BulkSendingList, error) {
+	var res *model.BulkSendingList
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// CommentsCreateis uncategorized and subject to change
+func (s *Service) CommentsCreate(envelopeID string, commentsPublish *model.CommentsPublish) *CommentsCreateOp {
+	return &CommentsCreateOp{
 		Credential: s.credential,
 		Method:     "POST",
 		Path:       strings.Join([]string{"envelopes", envelopeID, "comments"}, "/"),
@@ -54,11 +408,11 @@ func (s *Service) CommentsCreateEnvelopeComments(envelopeID string, commentsPubl
 	}
 }
 
-// CommentsCreateEnvelopeCommentsOp implements DocuSign API SDK Uncategorized::createEnvelopeComments
-type CommentsCreateEnvelopeCommentsOp esign.Op
+// CommentsCreateOp implements DocuSign API SDK Uncategorized::createEnvelopeComments
+type CommentsCreateOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *CommentsCreateEnvelopeCommentsOp) Do(ctx context.Context) (*model.CommentHistoryResult, error) {
+func (op *CommentsCreateOp) Do(ctx context.Context) (*model.CommentHistoryResult, error) {
 	var res *model.CommentHistoryResult
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
@@ -92,7 +446,28 @@ func (op *CommentsGetOp) Encoding(val string) *CommentsGetOp {
 	return op
 }
 
-// DocumentResponsiveHTMLPreviewCreateis uncategorized and subject to change
+// DataFeedElementGetis uncategorized and subject to change
+func (s *Service) DataFeedElementGet(dataFeedElementID string) *DataFeedElementGetOp {
+	return &DataFeedElementGetOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       strings.Join([]string{"data_feeds", "data", dataFeedElementID}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// DataFeedElementGetOp implements DocuSign API SDK Uncategorized::get
+type DataFeedElementGetOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *DataFeedElementGetOp) Do(ctx context.Context) (*esign.Download, error) {
+	var res *esign.Download
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// DocumentResponsiveHTMLPreviewCreate creates a preview of the responsive version of a document.
+// operation is uncategorized and subject to change.
 func (s *Service) DocumentResponsiveHTMLPreviewCreate(documentID string, envelopeID string, documentHTMLDefinition *model.DocumentHTMLDefinition) *DocumentResponsiveHTMLPreviewCreateOp {
 	return &DocumentResponsiveHTMLPreviewCreateOp{
 		Credential: s.credential,
@@ -111,6 +486,246 @@ type DocumentResponsiveHTMLPreviewCreateOp esign.Op
 func (op *DocumentResponsiveHTMLPreviewCreateOp) Do(ctx context.Context) (*model.DocumentHTMLDefinitions, error) {
 	var res *model.DocumentHTMLDefinitions
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// EnvelopeApplianceCreatePageInfois uncategorized and subject to change
+func (s *Service) EnvelopeApplianceCreatePageInfo(envelopeID string, media io.Reader, mimeType string) *EnvelopeApplianceCreatePageInfoOp {
+	return &EnvelopeApplianceCreatePageInfoOp{
+		Credential: s.credential,
+		Method:     "POST",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "page_info"}, "/"),
+		Payload:    &esign.UploadFile{Reader: media, ContentType: mimeType},
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceCreatePageInfoOp implements DocuSign API SDK Uncategorized::createAppliancePageInformation
+type EnvelopeApplianceCreatePageInfoOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceCreatePageInfoOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
+}
+
+// EnvelopeApplianceCreatePdfBlobis uncategorized and subject to change
+func (s *Service) EnvelopeApplianceCreatePdfBlob(envelopeID string, media io.Reader, mimeType string) *EnvelopeApplianceCreatePdfBlobOp {
+	return &EnvelopeApplianceCreatePdfBlobOp{
+		Credential: s.credential,
+		Method:     "POST",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "pdf_blobs"}, "/"),
+		Payload:    &esign.UploadFile{Reader: media, ContentType: mimeType},
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceCreatePdfBlobOp implements DocuSign API SDK Uncategorized::createAppliancePdfBlob
+type EnvelopeApplianceCreatePdfBlobOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceCreatePdfBlobOp) Do(ctx context.Context) (*model.DisplayAppliancePdf, error) {
+	var res *model.DisplayAppliancePdf
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// EnvelopeApplianceDeletePageInfois uncategorized and subject to change
+func (s *Service) EnvelopeApplianceDeletePageInfo(envelopeID string) *EnvelopeApplianceDeletePageInfoOp {
+	return &EnvelopeApplianceDeletePageInfoOp{
+		Credential: s.credential,
+		Method:     "DELETE",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "page_info"}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceDeletePageInfoOp implements DocuSign API SDK Uncategorized::deleteAppliancePageInformation
+type EnvelopeApplianceDeletePageInfoOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceDeletePageInfoOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
+}
+
+// EnvelopeApplianceGetApplianceInfois uncategorized and subject to change
+func (s *Service) EnvelopeApplianceGetApplianceInfo(envelopeID string) *EnvelopeApplianceGetApplianceInfoOp {
+	return &EnvelopeApplianceGetApplianceInfoOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info"}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceGetApplianceInfoOp implements DocuSign API SDK Uncategorized::getApplianceInfo
+type EnvelopeApplianceGetApplianceInfoOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceGetApplianceInfoOp) Do(ctx context.Context) (*model.DisplayApplianceInfo, error) {
+	var res *model.DisplayApplianceInfo
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// EnvelopeApplianceGetDocumentPageis uncategorized and subject to change
+func (s *Service) EnvelopeApplianceGetDocumentPage(envelopeID string) *EnvelopeApplianceGetDocumentPageOp {
+	return &EnvelopeApplianceGetDocumentPageOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "document_page_list"}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceGetDocumentPageOp implements DocuSign API SDK Uncategorized::getApplianceDocumentPage
+type EnvelopeApplianceGetDocumentPageOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceGetDocumentPageOp) Do(ctx context.Context) (*model.DisplayApplianceInfo, error) {
+	var res *model.DisplayApplianceInfo
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// EnvelopeApplianceGetPdfBlobis uncategorized and subject to change
+func (s *Service) EnvelopeApplianceGetPdfBlob(envelopeID string) *EnvelopeApplianceGetPdfBlobOp {
+	return &EnvelopeApplianceGetPdfBlobOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "pdf_blobs"}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceGetPdfBlobOp implements DocuSign API SDK Uncategorized::getAppliancePdfBlob
+type EnvelopeApplianceGetPdfBlobOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceGetPdfBlobOp) Do(ctx context.Context) (*model.DisplayAppliancePdf, error) {
+	var res *model.DisplayAppliancePdf
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// EnvelopeApplianceGetSignerAttachmentis uncategorized and subject to change
+func (s *Service) EnvelopeApplianceGetSignerAttachment(envelopeID string) *EnvelopeApplianceGetSignerAttachmentOp {
+	return &EnvelopeApplianceGetSignerAttachmentOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "signer_attachment_info"}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceGetSignerAttachmentOp implements DocuSign API SDK Uncategorized::getApplianceSignerAttachment
+type EnvelopeApplianceGetSignerAttachmentOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceGetSignerAttachmentOp) Do(ctx context.Context) (*model.DisplayApplianceSignerAttachment, error) {
+	var res *model.DisplayApplianceSignerAttachment
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// EnvelopeApplianceUpdateApplianceDocumentis uncategorized and subject to change
+func (s *Service) EnvelopeApplianceUpdateApplianceDocument(documentID string, envelopeID string, media io.Reader, mimeType string) *EnvelopeApplianceUpdateApplianceDocumentOp {
+	return &EnvelopeApplianceUpdateApplianceDocumentOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "document", documentID}, "/"),
+		Payload:    &esign.UploadFile{Reader: media, ContentType: mimeType},
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceUpdateApplianceDocumentOp implements DocuSign API SDK Uncategorized::updateApplianceDocument
+type EnvelopeApplianceUpdateApplianceDocumentOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceUpdateApplianceDocumentOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
+}
+
+// EnvelopeApplianceUpdatePageInfois uncategorized and subject to change
+func (s *Service) EnvelopeApplianceUpdatePageInfo(envelopeID string, media io.Reader, mimeType string) *EnvelopeApplianceUpdatePageInfoOp {
+	return &EnvelopeApplianceUpdatePageInfoOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "page_info"}, "/"),
+		Payload:    &esign.UploadFile{Reader: media, ContentType: mimeType},
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceUpdatePageInfoOp implements DocuSign API SDK Uncategorized::updateAppliancePageInformation
+type EnvelopeApplianceUpdatePageInfoOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceUpdatePageInfoOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
+}
+
+// EnvelopeApplianceUpdatePdfBlobis uncategorized and subject to change
+func (s *Service) EnvelopeApplianceUpdatePdfBlob(envelopeID string, media io.Reader, mimeType string) *EnvelopeApplianceUpdatePdfBlobOp {
+	return &EnvelopeApplianceUpdatePdfBlobOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "pdf_blobs"}, "/"),
+		Payload:    &esign.UploadFile{Reader: media, ContentType: mimeType},
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceUpdatePdfBlobOp implements DocuSign API SDK Uncategorized::updateAppliancePdfBlob
+type EnvelopeApplianceUpdatePdfBlobOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceUpdatePdfBlobOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
+}
+
+// EnvelopeApplianceUpdateRecipientDeniedDocumentCopyis uncategorized and subject to change
+func (s *Service) EnvelopeApplianceUpdateRecipientDeniedDocumentCopy(envelopeID string, media io.Reader, mimeType string) *EnvelopeApplianceUpdateRecipientDeniedDocumentCopyOp {
+	return &EnvelopeApplianceUpdateRecipientDeniedDocumentCopyOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "recipient_denied_copy"}, "/"),
+		Payload:    &esign.UploadFile{Reader: media, ContentType: mimeType},
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceUpdateRecipientDeniedDocumentCopyOp implements DocuSign API SDK Uncategorized::updateApplianceRecipientDeniedDocumentCopy
+type EnvelopeApplianceUpdateRecipientDeniedDocumentCopyOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceUpdateRecipientDeniedDocumentCopyOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
+}
+
+// EnvelopeApplianceUpdateSignerAttachmentis uncategorized and subject to change
+func (s *Service) EnvelopeApplianceUpdateSignerAttachment(envelopeID string, media io.Reader, mimeType string) *EnvelopeApplianceUpdateSignerAttachmentOp {
+	return &EnvelopeApplianceUpdateSignerAttachmentOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "display_appliance_info", "signer_attachment_info"}, "/"),
+		Payload:    &esign.UploadFile{Reader: media, ContentType: mimeType},
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeApplianceUpdateSignerAttachmentOp implements DocuSign API SDK Uncategorized::updateApplianceSignerAttachment
+type EnvelopeApplianceUpdateSignerAttachmentOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeApplianceUpdateSignerAttachmentOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
 }
 
 // EnvelopeDocumentHTMLDefinitionsGetis uncategorized and subject to change
@@ -133,9 +748,9 @@ func (op *EnvelopeDocumentHTMLDefinitionsGetOp) Do(ctx context.Context) (*model.
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// EnvelopeDocumentTabsCreateDocumentTabsis uncategorized and subject to change
-func (s *Service) EnvelopeDocumentTabsCreateDocumentTabs(documentID string, envelopeID string, templateRecipientTabs *model.Tabs) *EnvelopeDocumentTabsCreateDocumentTabsOp {
-	return &EnvelopeDocumentTabsCreateDocumentTabsOp{
+// EnvelopeDocumentTabsCreateis uncategorized and subject to change
+func (s *Service) EnvelopeDocumentTabsCreate(documentID string, envelopeID string, templateRecipientTabs *model.Tabs) *EnvelopeDocumentTabsCreateOp {
+	return &EnvelopeDocumentTabsCreateOp{
 		Credential: s.credential,
 		Method:     "POST",
 		Path:       strings.Join([]string{"envelopes", envelopeID, "documents", documentID, "tabs"}, "/"),
@@ -145,18 +760,18 @@ func (s *Service) EnvelopeDocumentTabsCreateDocumentTabs(documentID string, enve
 	}
 }
 
-// EnvelopeDocumentTabsCreateDocumentTabsOp implements DocuSign API SDK Uncategorized::createDocumentTabs
-type EnvelopeDocumentTabsCreateDocumentTabsOp esign.Op
+// EnvelopeDocumentTabsCreateOp implements DocuSign API SDK Uncategorized::createDocumentTabs
+type EnvelopeDocumentTabsCreateOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *EnvelopeDocumentTabsCreateDocumentTabsOp) Do(ctx context.Context) (*model.Tabs, error) {
+func (op *EnvelopeDocumentTabsCreateOp) Do(ctx context.Context) (*model.Tabs, error) {
 	var res *model.Tabs
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// EnvelopeDocumentTabsDeleteDocumentTabsis uncategorized and subject to change
-func (s *Service) EnvelopeDocumentTabsDeleteDocumentTabs(documentID string, envelopeID string, templateRecipientTabs *model.Tabs) *EnvelopeDocumentTabsDeleteDocumentTabsOp {
-	return &EnvelopeDocumentTabsDeleteDocumentTabsOp{
+// EnvelopeDocumentTabsDeleteis uncategorized and subject to change
+func (s *Service) EnvelopeDocumentTabsDelete(documentID string, envelopeID string, templateRecipientTabs *model.Tabs) *EnvelopeDocumentTabsDeleteOp {
+	return &EnvelopeDocumentTabsDeleteOp{
 		Credential: s.credential,
 		Method:     "DELETE",
 		Path:       strings.Join([]string{"envelopes", envelopeID, "documents", documentID, "tabs"}, "/"),
@@ -166,18 +781,18 @@ func (s *Service) EnvelopeDocumentTabsDeleteDocumentTabs(documentID string, enve
 	}
 }
 
-// EnvelopeDocumentTabsDeleteDocumentTabsOp implements DocuSign API SDK Uncategorized::deleteDocumentTabs
-type EnvelopeDocumentTabsDeleteDocumentTabsOp esign.Op
+// EnvelopeDocumentTabsDeleteOp implements DocuSign API SDK Uncategorized::deleteDocumentTabs
+type EnvelopeDocumentTabsDeleteOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *EnvelopeDocumentTabsDeleteDocumentTabsOp) Do(ctx context.Context) (*model.Tabs, error) {
+func (op *EnvelopeDocumentTabsDeleteOp) Do(ctx context.Context) (*model.Tabs, error) {
 	var res *model.Tabs
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// EnvelopeDocumentTabsUpdateDocumentTabsis uncategorized and subject to change
-func (s *Service) EnvelopeDocumentTabsUpdateDocumentTabs(documentID string, envelopeID string, templateRecipientTabs *model.Tabs) *EnvelopeDocumentTabsUpdateDocumentTabsOp {
-	return &EnvelopeDocumentTabsUpdateDocumentTabsOp{
+// EnvelopeDocumentTabsUpdateis uncategorized and subject to change
+func (s *Service) EnvelopeDocumentTabsUpdate(documentID string, envelopeID string, templateRecipientTabs *model.Tabs) *EnvelopeDocumentTabsUpdateOp {
+	return &EnvelopeDocumentTabsUpdateOp{
 		Credential: s.credential,
 		Method:     "PUT",
 		Path:       strings.Join([]string{"envelopes", envelopeID, "documents", documentID, "tabs"}, "/"),
@@ -187,11 +802,11 @@ func (s *Service) EnvelopeDocumentTabsUpdateDocumentTabs(documentID string, enve
 	}
 }
 
-// EnvelopeDocumentTabsUpdateDocumentTabsOp implements DocuSign API SDK Uncategorized::updateDocumentTabs
-type EnvelopeDocumentTabsUpdateDocumentTabsOp esign.Op
+// EnvelopeDocumentTabsUpdateOp implements DocuSign API SDK Uncategorized::updateDocumentTabs
+type EnvelopeDocumentTabsUpdateOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *EnvelopeDocumentTabsUpdateDocumentTabsOp) Do(ctx context.Context) (*model.Tabs, error) {
+func (op *EnvelopeDocumentTabsUpdateOp) Do(ctx context.Context) (*model.Tabs, error) {
 	var res *model.Tabs
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
@@ -216,50 +831,32 @@ func (op *EnvelopeHTMLDefinitionsListOp) Do(ctx context.Context) (*model.Documen
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// EnvelopePurgeConfigurationGetEnvelopePurgeConfigurationis uncategorized and subject to change
-func (s *Service) EnvelopePurgeConfigurationGetEnvelopePurgeConfiguration() *EnvelopePurgeConfigurationGetEnvelopePurgeConfigurationOp {
-	return &EnvelopePurgeConfigurationGetEnvelopePurgeConfigurationOp{
+// EnvelopeRecipientsCreateEnvelopeRecipientPreview creates an envelope recipient preview.
+// operation is uncategorized and subject to change.
+func (s *Service) EnvelopeRecipientsCreateEnvelopeRecipientPreview(envelopeID string, recipientPreviewRequest *model.RecipientPreviewRequest) *EnvelopeRecipientsCreateEnvelopeRecipientPreviewOp {
+	return &EnvelopeRecipientsCreateEnvelopeRecipientPreviewOp{
 		Credential: s.credential,
-		Method:     "GET",
-		Path:       "settings/envelope_purge_configuration",
+		Method:     "POST",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "views", "recipient_preview"}, "/"),
+		Payload:    recipientPreviewRequest,
 		QueryOpts:  make(url.Values),
 		Version:    esign.VersionV21,
 	}
 }
 
-// EnvelopePurgeConfigurationGetEnvelopePurgeConfigurationOp implements DocuSign API SDK Uncategorized::getEnvelopePurgeConfiguration
-type EnvelopePurgeConfigurationGetEnvelopePurgeConfigurationOp esign.Op
+// EnvelopeRecipientsCreateEnvelopeRecipientPreviewOp implements DocuSign API SDK Uncategorized::createEnvelopeRecipientPreview
+type EnvelopeRecipientsCreateEnvelopeRecipientPreviewOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *EnvelopePurgeConfigurationGetEnvelopePurgeConfigurationOp) Do(ctx context.Context) (*model.EnvelopePurgeConfiguration, error) {
-	var res *model.EnvelopePurgeConfiguration
+func (op *EnvelopeRecipientsCreateEnvelopeRecipientPreviewOp) Do(ctx context.Context) (*model.ViewURL, error) {
+	var res *model.ViewURL
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// EnvelopePurgeConfigurationUpdateEnvelopePurgeConfigurationis uncategorized and subject to change
-func (s *Service) EnvelopePurgeConfigurationUpdateEnvelopePurgeConfiguration(envelopePurgeConfiguration *model.EnvelopePurgeConfiguration) *EnvelopePurgeConfigurationUpdateEnvelopePurgeConfigurationOp {
-	return &EnvelopePurgeConfigurationUpdateEnvelopePurgeConfigurationOp{
-		Credential: s.credential,
-		Method:     "PUT",
-		Path:       "settings/envelope_purge_configuration",
-		Payload:    envelopePurgeConfiguration,
-		QueryOpts:  make(url.Values),
-		Version:    esign.VersionV21,
-	}
-}
-
-// EnvelopePurgeConfigurationUpdateEnvelopePurgeConfigurationOp implements DocuSign API SDK Uncategorized::updateEnvelopePurgeConfiguration
-type EnvelopePurgeConfigurationUpdateEnvelopePurgeConfigurationOp esign.Op
-
-// Do executes the op.  A nil context will return error.
-func (op *EnvelopePurgeConfigurationUpdateEnvelopePurgeConfigurationOp) Do(ctx context.Context) (*model.EnvelopePurgeConfiguration, error) {
-	var res *model.EnvelopePurgeConfiguration
-	return res, ((*esign.Op)(op)).Do(ctx, &res)
-}
-
-// EnvelopeTransferRulesCreateEnvelopeTransferRulesis uncategorized and subject to change
-func (s *Service) EnvelopeTransferRulesCreateEnvelopeTransferRules(envelopeTransferRuleRequest *model.EnvelopeTransferRuleRequest) *EnvelopeTransferRulesCreateEnvelopeTransferRulesOp {
-	return &EnvelopeTransferRulesCreateEnvelopeTransferRulesOp{
+// EnvelopeTransferRulesCreate creates an envelope transfer rule.
+// operation is uncategorized and subject to change.
+func (s *Service) EnvelopeTransferRulesCreate(envelopeTransferRuleRequest *model.EnvelopeTransferRuleRequest) *EnvelopeTransferRulesCreateOp {
+	return &EnvelopeTransferRulesCreateOp{
 		Credential: s.credential,
 		Method:     "POST",
 		Path:       "envelopes/transfer_rules",
@@ -269,18 +866,19 @@ func (s *Service) EnvelopeTransferRulesCreateEnvelopeTransferRules(envelopeTrans
 	}
 }
 
-// EnvelopeTransferRulesCreateEnvelopeTransferRulesOp implements DocuSign API SDK Uncategorized::createEnvelopeTransferRules
-type EnvelopeTransferRulesCreateEnvelopeTransferRulesOp esign.Op
+// EnvelopeTransferRulesCreateOp implements DocuSign API SDK Uncategorized::create
+type EnvelopeTransferRulesCreateOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *EnvelopeTransferRulesCreateEnvelopeTransferRulesOp) Do(ctx context.Context) (*model.EnvelopeTransferRuleInformation, error) {
+func (op *EnvelopeTransferRulesCreateOp) Do(ctx context.Context) (*model.EnvelopeTransferRuleInformation, error) {
 	var res *model.EnvelopeTransferRuleInformation
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// EnvelopeTransferRulesDeleteEnvelopeTransferRulesis uncategorized and subject to change
-func (s *Service) EnvelopeTransferRulesDeleteEnvelopeTransferRules(envelopeTransferRuleID string) *EnvelopeTransferRulesDeleteEnvelopeTransferRulesOp {
-	return &EnvelopeTransferRulesDeleteEnvelopeTransferRulesOp{
+// EnvelopeTransferRulesDelete deletes an envelope transfer rule.
+// operation is uncategorized and subject to change.
+func (s *Service) EnvelopeTransferRulesDelete(envelopeTransferRuleID string) *EnvelopeTransferRulesDeleteOp {
+	return &EnvelopeTransferRulesDeleteOp{
 		Credential: s.credential,
 		Method:     "DELETE",
 		Path:       strings.Join([]string{"envelopes", "transfer_rules", envelopeTransferRuleID}, "/"),
@@ -289,17 +887,18 @@ func (s *Service) EnvelopeTransferRulesDeleteEnvelopeTransferRules(envelopeTrans
 	}
 }
 
-// EnvelopeTransferRulesDeleteEnvelopeTransferRulesOp implements DocuSign API SDK Uncategorized::deleteEnvelopeTransferRules
-type EnvelopeTransferRulesDeleteEnvelopeTransferRulesOp esign.Op
+// EnvelopeTransferRulesDeleteOp implements DocuSign API SDK Uncategorized::delete
+type EnvelopeTransferRulesDeleteOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *EnvelopeTransferRulesDeleteEnvelopeTransferRulesOp) Do(ctx context.Context) error {
+func (op *EnvelopeTransferRulesDeleteOp) Do(ctx context.Context) error {
 	return ((*esign.Op)(op)).Do(ctx, nil)
 }
 
-// EnvelopeTransferRulesGetEnvelopeTransferRulesis uncategorized and subject to change
-func (s *Service) EnvelopeTransferRulesGetEnvelopeTransferRules() *EnvelopeTransferRulesGetEnvelopeTransferRulesOp {
-	return &EnvelopeTransferRulesGetEnvelopeTransferRulesOp{
+// EnvelopeTransferRulesGet gets envelope transfer rules.
+// operation is uncategorized and subject to change.
+func (s *Service) EnvelopeTransferRulesGet() *EnvelopeTransferRulesGetOp {
+	return &EnvelopeTransferRulesGetOp{
 		Credential: s.credential,
 		Method:     "GET",
 		Path:       "envelopes/transfer_rules",
@@ -308,32 +907,55 @@ func (s *Service) EnvelopeTransferRulesGetEnvelopeTransferRules() *EnvelopeTrans
 	}
 }
 
-// EnvelopeTransferRulesGetEnvelopeTransferRulesOp implements DocuSign API SDK Uncategorized::getEnvelopeTransferRules
-type EnvelopeTransferRulesGetEnvelopeTransferRulesOp esign.Op
+// EnvelopeTransferRulesGetOp implements DocuSign API SDK Uncategorized::get
+type EnvelopeTransferRulesGetOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *EnvelopeTransferRulesGetEnvelopeTransferRulesOp) Do(ctx context.Context) (*model.EnvelopeTransferRuleInformation, error) {
+func (op *EnvelopeTransferRulesGetOp) Do(ctx context.Context) (*model.EnvelopeTransferRuleInformation, error) {
 	var res *model.EnvelopeTransferRuleInformation
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// Count is the maximum number of results to return.
-func (op *EnvelopeTransferRulesGetEnvelopeTransferRulesOp) Count(val string) *EnvelopeTransferRulesGetEnvelopeTransferRulesOp {
+// Count (Optional) The maximum number of results to return.
+func (op *EnvelopeTransferRulesGetOp) Count(val string) *EnvelopeTransferRulesGetOp {
 	if op != nil {
 		op.QueryOpts.Set("count", val)
 	}
 	return op
 }
 
-// StartPosition is the position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
-func (op *EnvelopeTransferRulesGetEnvelopeTransferRulesOp) StartPosition(val string) *EnvelopeTransferRulesGetEnvelopeTransferRulesOp {
+// StartPosition (Optional) The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+func (op *EnvelopeTransferRulesGetOp) StartPosition(val string) *EnvelopeTransferRulesGetOp {
 	if op != nil {
 		op.QueryOpts.Set("start_position", val)
 	}
 	return op
 }
 
-// EnvelopeTransferRulesUpdateEnvelopeTransferRuleis uncategorized and subject to change
+// EnvelopeTransferRulesUpdate changes the status of multiple envelope transfer rules.
+// operation is uncategorized and subject to change.
+func (s *Service) EnvelopeTransferRulesUpdate(envelopeTransferRules *model.EnvelopeTransferRuleInformation) *EnvelopeTransferRulesUpdateOp {
+	return &EnvelopeTransferRulesUpdateOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       "envelopes/transfer_rules",
+		Payload:    envelopeTransferRules,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// EnvelopeTransferRulesUpdateOp implements DocuSign API SDK Uncategorized::update
+type EnvelopeTransferRulesUpdateOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *EnvelopeTransferRulesUpdateOp) Do(ctx context.Context) (*model.EnvelopeTransferRuleInformation, error) {
+	var res *model.EnvelopeTransferRuleInformation
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// EnvelopeTransferRulesUpdateEnvelopeTransferRule changes the status of an envelope transfer rule.
+// operation is uncategorized and subject to change.
 func (s *Service) EnvelopeTransferRulesUpdateEnvelopeTransferRule(envelopeTransferRuleID string, envelopeTransferRule *model.EnvelopeTransferRule) *EnvelopeTransferRulesUpdateEnvelopeTransferRuleOp {
 	return &EnvelopeTransferRulesUpdateEnvelopeTransferRuleOp{
 		Credential: s.credential,
@@ -354,111 +976,70 @@ func (op *EnvelopeTransferRulesUpdateEnvelopeTransferRuleOp) Do(ctx context.Cont
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// EnvelopeTransferRulesUpdateEnvelopeTransferRulesis uncategorized and subject to change
-func (s *Service) EnvelopeTransferRulesUpdateEnvelopeTransferRules(envelopeTransferRules *model.EnvelopeTransferRuleInformation) *EnvelopeTransferRulesUpdateEnvelopeTransferRulesOp {
-	return &EnvelopeTransferRulesUpdateEnvelopeTransferRulesOp{
-		Credential: s.credential,
-		Method:     "PUT",
-		Path:       "envelopes/transfer_rules",
-		Payload:    envelopeTransferRules,
-		QueryOpts:  make(url.Values),
-		Version:    esign.VersionV21,
-	}
-}
-
-// EnvelopeTransferRulesUpdateEnvelopeTransferRulesOp implements DocuSign API SDK Uncategorized::updateEnvelopeTransferRules
-type EnvelopeTransferRulesUpdateEnvelopeTransferRulesOp esign.Op
-
-// Do executes the op.  A nil context will return error.
-func (op *EnvelopeTransferRulesUpdateEnvelopeTransferRulesOp) Do(ctx context.Context) (*model.EnvelopeTransferRuleInformation, error) {
-	var res *model.EnvelopeTransferRuleInformation
-	return res, ((*esign.Op)(op)).Do(ctx, &res)
-}
-
-// EnvelopeViewsCreateEnvelopeRecipientPreviewis uncategorized and subject to change
-func (s *Service) EnvelopeViewsCreateEnvelopeRecipientPreview(envelopeID string, recipientPreviewRequest *model.RecipientPreviewRequest) *EnvelopeViewsCreateEnvelopeRecipientPreviewOp {
-	return &EnvelopeViewsCreateEnvelopeRecipientPreviewOp{
-		Credential: s.credential,
-		Method:     "POST",
-		Path:       strings.Join([]string{"envelopes", envelopeID, "views", "recipient_preview"}, "/"),
-		Payload:    recipientPreviewRequest,
-		QueryOpts:  make(url.Values),
-		Version:    esign.VersionV21,
-	}
-}
-
-// EnvelopeViewsCreateEnvelopeRecipientPreviewOp implements DocuSign API SDK Uncategorized::createEnvelopeRecipientPreview
-type EnvelopeViewsCreateEnvelopeRecipientPreviewOp esign.Op
-
-// Do executes the op.  A nil context will return error.
-func (op *EnvelopeViewsCreateEnvelopeRecipientPreviewOp) Do(ctx context.Context) (*model.ViewURL, error) {
-	var res *model.ViewURL
-	return res, ((*esign.Op)(op)).Do(ctx, &res)
-}
-
-// EnvelopeViewsCreateTemplateRecipientPreviewis uncategorized and subject to change
-func (s *Service) EnvelopeViewsCreateTemplateRecipientPreview(templateID string, recipientPreviewRequest *model.RecipientPreviewRequest) *EnvelopeViewsCreateTemplateRecipientPreviewOp {
-	return &EnvelopeViewsCreateTemplateRecipientPreviewOp{
-		Credential: s.credential,
-		Method:     "POST",
-		Path:       strings.Join([]string{"templates", templateID, "views", "recipient_preview"}, "/"),
-		Payload:    recipientPreviewRequest,
-		QueryOpts:  make(url.Values),
-		Version:    esign.VersionV21,
-	}
-}
-
-// EnvelopeViewsCreateTemplateRecipientPreviewOp implements DocuSign API SDK Uncategorized::createTemplateRecipientPreview
-type EnvelopeViewsCreateTemplateRecipientPreviewOp esign.Op
-
-// Do executes the op.  A nil context will return error.
-func (op *EnvelopeViewsCreateTemplateRecipientPreviewOp) Do(ctx context.Context) (*model.ViewURL, error) {
-	var res *model.ViewURL
-	return res, ((*esign.Op)(op)).Do(ctx, &res)
-}
-
-// NotificationDefaultsGetNotificationDefaultsis uncategorized and subject to change
-func (s *Service) NotificationDefaultsGetNotificationDefaults() *NotificationDefaultsGetNotificationDefaultsOp {
-	return &NotificationDefaultsGetNotificationDefaultsOp{
+// FavoriteTemplatesGetFavoriteTemplatesis uncategorized and subject to change
+func (s *Service) FavoriteTemplatesGetFavoriteTemplates() *FavoriteTemplatesGetFavoriteTemplatesOp {
+	return &FavoriteTemplatesGetFavoriteTemplatesOp{
 		Credential: s.credential,
 		Method:     "GET",
-		Path:       "settings/notification_defaults",
+		Path:       "favorite_templates",
 		QueryOpts:  make(url.Values),
 		Version:    esign.VersionV21,
 	}
 }
 
-// NotificationDefaultsGetNotificationDefaultsOp implements DocuSign API SDK Uncategorized::getNotificationDefaults
-type NotificationDefaultsGetNotificationDefaultsOp esign.Op
+// FavoriteTemplatesGetFavoriteTemplatesOp implements DocuSign API SDK Uncategorized::getFavoriteTemplates
+type FavoriteTemplatesGetFavoriteTemplatesOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *NotificationDefaultsGetNotificationDefaultsOp) Do(ctx context.Context) (*model.NotificationDefaults, error) {
-	var res *model.NotificationDefaults
+func (op *FavoriteTemplatesGetFavoriteTemplatesOp) Do(ctx context.Context) (*model.FavoriteTemplatesInfo, error) {
+	var res *model.FavoriteTemplatesInfo
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// NotificationDefaultsUpdateNotificationDefaultsis uncategorized and subject to change
-func (s *Service) NotificationDefaultsUpdateNotificationDefaults(notificationDefaults *model.NotificationDefaults) *NotificationDefaultsUpdateNotificationDefaultsOp {
-	return &NotificationDefaultsUpdateNotificationDefaultsOp{
+// FavoriteTemplatesUnFavoriteTemplateis uncategorized and subject to change
+func (s *Service) FavoriteTemplatesUnFavoriteTemplate(favoriteTemplates *model.FavoriteTemplatesInfo) *FavoriteTemplatesUnFavoriteTemplateOp {
+	return &FavoriteTemplatesUnFavoriteTemplateOp{
+		Credential: s.credential,
+		Method:     "DELETE",
+		Path:       "favorite_templates",
+		Payload:    favoriteTemplates,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// FavoriteTemplatesUnFavoriteTemplateOp implements DocuSign API SDK Uncategorized::unFavoriteTemplate
+type FavoriteTemplatesUnFavoriteTemplateOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *FavoriteTemplatesUnFavoriteTemplateOp) Do(ctx context.Context) (*model.FavoriteTemplatesInfo, error) {
+	var res *model.FavoriteTemplatesInfo
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// FavoriteTemplatesUpdateFavoriteTemplateis uncategorized and subject to change
+func (s *Service) FavoriteTemplatesUpdateFavoriteTemplate(favoriteTemplates *model.FavoriteTemplatesInfo) *FavoriteTemplatesUpdateFavoriteTemplateOp {
+	return &FavoriteTemplatesUpdateFavoriteTemplateOp{
 		Credential: s.credential,
 		Method:     "PUT",
-		Path:       "settings/notification_defaults",
-		Payload:    notificationDefaults,
+		Path:       "favorite_templates",
+		Payload:    favoriteTemplates,
 		QueryOpts:  make(url.Values),
 		Version:    esign.VersionV21,
 	}
 }
 
-// NotificationDefaultsUpdateNotificationDefaultsOp implements DocuSign API SDK Uncategorized::updateNotificationDefaults
-type NotificationDefaultsUpdateNotificationDefaultsOp esign.Op
+// FavoriteTemplatesUpdateFavoriteTemplateOp implements DocuSign API SDK Uncategorized::updateFavoriteTemplate
+type FavoriteTemplatesUpdateFavoriteTemplateOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *NotificationDefaultsUpdateNotificationDefaultsOp) Do(ctx context.Context) (*model.NotificationDefaults, error) {
-	var res *model.NotificationDefaults
+func (op *FavoriteTemplatesUpdateFavoriteTemplateOp) Do(ctx context.Context) (*model.FavoriteTemplatesInfo, error) {
+	var res *model.FavoriteTemplatesInfo
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// ResponsiveHTMLPreviewCreateis uncategorized and subject to change
+// ResponsiveHTMLPreviewCreate creates a preview of the responsive versions of all of the documents in an envelope.
+// operation is uncategorized and subject to change.
 func (s *Service) ResponsiveHTMLPreviewCreate(envelopeID string, documentHTMLDefinition *model.DocumentHTMLDefinition) *ResponsiveHTMLPreviewCreateOp {
 	return &ResponsiveHTMLPreviewCreateOp{
 		Credential: s.credential,
@@ -477,6 +1058,46 @@ type ResponsiveHTMLPreviewCreateOp esign.Op
 func (op *ResponsiveHTMLPreviewCreateOp) Do(ctx context.Context) (*model.DocumentHTMLDefinitions, error) {
 	var res *model.DocumentHTMLDefinitions
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// TabsBlobGetTabsBlobis uncategorized and subject to change
+func (s *Service) TabsBlobGetTabsBlob(envelopeID string) *TabsBlobGetTabsBlobOp {
+	return &TabsBlobGetTabsBlobOp{
+		Credential: s.credential,
+		Method:     "GET",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "tabs_blob"}, "/"),
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// TabsBlobGetTabsBlobOp implements DocuSign API SDK Uncategorized::getTabsBlob
+type TabsBlobGetTabsBlobOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *TabsBlobGetTabsBlobOp) Do(ctx context.Context) (*esign.Download, error) {
+	var res *esign.Download
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// TabsBlobPutTabsBlobis uncategorized and subject to change
+func (s *Service) TabsBlobPutTabsBlob(envelopeID string, media io.Reader, mimeType string) *TabsBlobPutTabsBlobOp {
+	return &TabsBlobPutTabsBlobOp{
+		Credential: s.credential,
+		Method:     "PUT",
+		Path:       strings.Join([]string{"envelopes", envelopeID, "tabs_blob"}, "/"),
+		Payload:    &esign.UploadFile{Reader: media, ContentType: mimeType},
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// TabsBlobPutTabsBlobOp implements DocuSign API SDK Uncategorized::putTabsBlob
+type TabsBlobPutTabsBlobOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *TabsBlobPutTabsBlobOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
 }
 
 // TemplateDocumentHTMLDefinitionsListis uncategorized and subject to change
@@ -499,7 +1120,8 @@ func (op *TemplateDocumentHTMLDefinitionsListOp) Do(ctx context.Context) (*model
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// TemplateDocumentResponsiveHTMLPreviewCreateis uncategorized and subject to change
+// TemplateDocumentResponsiveHTMLPreviewCreate creates a preview of the responsive version of a template document.
+// operation is uncategorized and subject to change.
 func (s *Service) TemplateDocumentResponsiveHTMLPreviewCreate(documentID string, templateID string, documentHTMLDefinition *model.DocumentHTMLDefinition) *TemplateDocumentResponsiveHTMLPreviewCreateOp {
 	return &TemplateDocumentResponsiveHTMLPreviewCreateOp{
 		Credential: s.credential,
@@ -520,10 +1142,10 @@ func (op *TemplateDocumentResponsiveHTMLPreviewCreateOp) Do(ctx context.Context)
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// TemplateDocumentTabsCreateTemplateDocumentTabs create Template Document Tabs
+// TemplateDocumentTabsCreate create Template Document Tabs
 // operation is uncategorized and subject to change.
-func (s *Service) TemplateDocumentTabsCreateTemplateDocumentTabs(documentID string, templateID string, templateTabs *model.TemplateTabs) *TemplateDocumentTabsCreateTemplateDocumentTabsOp {
-	return &TemplateDocumentTabsCreateTemplateDocumentTabsOp{
+func (s *Service) TemplateDocumentTabsCreate(documentID string, templateID string, templateTabs *model.TemplateTabs) *TemplateDocumentTabsCreateOp {
+	return &TemplateDocumentTabsCreateOp{
 		Credential: s.credential,
 		Method:     "POST",
 		Path:       strings.Join([]string{"templates", templateID, "documents", documentID, "tabs"}, "/"),
@@ -533,18 +1155,18 @@ func (s *Service) TemplateDocumentTabsCreateTemplateDocumentTabs(documentID stri
 	}
 }
 
-// TemplateDocumentTabsCreateTemplateDocumentTabsOp implements DocuSign API SDK Uncategorized::createTemplateDocumentTabs
-type TemplateDocumentTabsCreateTemplateDocumentTabsOp esign.Op
+// TemplateDocumentTabsCreateOp implements DocuSign API SDK Uncategorized::postDocumentTabs
+type TemplateDocumentTabsCreateOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *TemplateDocumentTabsCreateTemplateDocumentTabsOp) Do(ctx context.Context) (*model.Tabs, error) {
+func (op *TemplateDocumentTabsCreateOp) Do(ctx context.Context) (*model.Tabs, error) {
 	var res *model.Tabs
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// TemplateDocumentTabsDeleteTemplateDocumentTabsis uncategorized and subject to change
-func (s *Service) TemplateDocumentTabsDeleteTemplateDocumentTabs(documentID string, templateID string, templateTabs *model.TemplateTabs) *TemplateDocumentTabsDeleteTemplateDocumentTabsOp {
-	return &TemplateDocumentTabsDeleteTemplateDocumentTabsOp{
+// TemplateDocumentTabsDeleteis uncategorized and subject to change
+func (s *Service) TemplateDocumentTabsDelete(documentID string, templateID string, templateTabs *model.TemplateTabs) *TemplateDocumentTabsDeleteOp {
+	return &TemplateDocumentTabsDeleteOp{
 		Credential: s.credential,
 		Method:     "DELETE",
 		Path:       strings.Join([]string{"templates", templateID, "documents", documentID, "tabs"}, "/"),
@@ -554,18 +1176,18 @@ func (s *Service) TemplateDocumentTabsDeleteTemplateDocumentTabs(documentID stri
 	}
 }
 
-// TemplateDocumentTabsDeleteTemplateDocumentTabsOp implements DocuSign API SDK Uncategorized::deleteTemplateDocumentTabs
-type TemplateDocumentTabsDeleteTemplateDocumentTabsOp esign.Op
+// TemplateDocumentTabsDeleteOp implements DocuSign API SDK Uncategorized::deleteDocumentTabs
+type TemplateDocumentTabsDeleteOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *TemplateDocumentTabsDeleteTemplateDocumentTabsOp) Do(ctx context.Context) (*model.Tabs, error) {
+func (op *TemplateDocumentTabsDeleteOp) Do(ctx context.Context) (*model.Tabs, error) {
 	var res *model.Tabs
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// TemplateDocumentTabsUpdateTemplateDocumentTabsis uncategorized and subject to change
-func (s *Service) TemplateDocumentTabsUpdateTemplateDocumentTabs(documentID string, templateID string, templateTabs *model.TemplateTabs) *TemplateDocumentTabsUpdateTemplateDocumentTabsOp {
-	return &TemplateDocumentTabsUpdateTemplateDocumentTabsOp{
+// TemplateDocumentTabsUpdateis uncategorized and subject to change
+func (s *Service) TemplateDocumentTabsUpdate(documentID string, templateID string, templateTabs *model.TemplateTabs) *TemplateDocumentTabsUpdateOp {
+	return &TemplateDocumentTabsUpdateOp{
 		Credential: s.credential,
 		Method:     "PUT",
 		Path:       strings.Join([]string{"templates", templateID, "documents", documentID, "tabs"}, "/"),
@@ -575,11 +1197,11 @@ func (s *Service) TemplateDocumentTabsUpdateTemplateDocumentTabs(documentID stri
 	}
 }
 
-// TemplateDocumentTabsUpdateTemplateDocumentTabsOp implements DocuSign API SDK Uncategorized::updateTemplateDocumentTabs
-type TemplateDocumentTabsUpdateTemplateDocumentTabsOp esign.Op
+// TemplateDocumentTabsUpdateOp implements DocuSign API SDK Uncategorized::putDocumentTabs
+type TemplateDocumentTabsUpdateOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *TemplateDocumentTabsUpdateTemplateDocumentTabsOp) Do(ctx context.Context) (*model.Tabs, error) {
+func (op *TemplateDocumentTabsUpdateOp) Do(ctx context.Context) (*model.Tabs, error) {
 	var res *model.Tabs
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
@@ -604,7 +1226,30 @@ func (op *TemplateHTMLDefinitionsListOp) Do(ctx context.Context) (*model.Documen
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// TemplateResponsiveHTMLPreviewCreateis uncategorized and subject to change
+// TemplateRecipientsCreateTemplateRecipientPreview creates a template recipient preview.
+// operation is uncategorized and subject to change.
+func (s *Service) TemplateRecipientsCreateTemplateRecipientPreview(templateID string, recipientPreviewRequest *model.RecipientPreviewRequest) *TemplateRecipientsCreateTemplateRecipientPreviewOp {
+	return &TemplateRecipientsCreateTemplateRecipientPreviewOp{
+		Credential: s.credential,
+		Method:     "POST",
+		Path:       strings.Join([]string{"templates", templateID, "views", "recipient_preview"}, "/"),
+		Payload:    recipientPreviewRequest,
+		QueryOpts:  make(url.Values),
+		Version:    esign.VersionV21,
+	}
+}
+
+// TemplateRecipientsCreateTemplateRecipientPreviewOp implements DocuSign API SDK Uncategorized::createTemplateRecipientPreview
+type TemplateRecipientsCreateTemplateRecipientPreviewOp esign.Op
+
+// Do executes the op.  A nil context will return error.
+func (op *TemplateRecipientsCreateTemplateRecipientPreviewOp) Do(ctx context.Context) (*model.ViewURL, error) {
+	var res *model.ViewURL
+	return res, ((*esign.Op)(op)).Do(ctx, &res)
+}
+
+// TemplateResponsiveHTMLPreviewCreate creates a preview of the responsive versions of all of the documents associated with a template.
+// operation is uncategorized and subject to change.
 func (s *Service) TemplateResponsiveHTMLPreviewCreate(templateID string, documentHTMLDefinition *model.DocumentHTMLDefinition) *TemplateResponsiveHTMLPreviewCreateOp {
 	return &TemplateResponsiveHTMLPreviewCreateOp{
 		Credential: s.credential,

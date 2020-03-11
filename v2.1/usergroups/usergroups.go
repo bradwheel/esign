@@ -49,7 +49,7 @@ func New(cred esign.Credential) *Service {
 	return &Service{credential: cred}
 }
 
-// GroupBrandsDelete deletes brand information from the requested group.
+// GroupBrandsDelete deletes brand information from a group.
 //
 // https://developers.docusign.com/esign-rest-api/reference/usergroups/groupbrands/delete
 //
@@ -74,8 +74,7 @@ func (op *GroupBrandsDeleteOp) Do(ctx context.Context) (*model.BrandsResponse, e
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// GroupBrandsGet gets group brand ID Information.
-//
+// GroupBrandsGet gets the brand information for a group.
 //
 // https://developers.docusign.com/esign-rest-api/reference/usergroups/groupbrands/get
 //
@@ -99,7 +98,7 @@ func (op *GroupBrandsGetOp) Do(ctx context.Context) (*model.BrandsResponse, erro
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// GroupBrandsUpdate adds group brand ID information to a group.
+// GroupBrandsUpdate adds an existing brand to a group.
 //
 // https://developers.docusign.com/esign-rest-api/reference/usergroups/groupbrands/update
 //

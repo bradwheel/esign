@@ -10,13 +10,13 @@
 //
 // Use the Templates category to manage your account's templates.
 //
-// You can:
+// This section shows you how to perform the following tasks:
 //
 // * Create, list, get, update, and delete templates.
-// * Manage templates' notification and group sharing settings.
+// * Manage the notification and group sharing settings for templates.
 // * Fetch and rotate pages from a document used by a template.
 //
-// Templates can be created programmatically or can be created via the DocuSign web interface and then used by your application.
+// You can create templates either programmatically or through the DocuSign web interface and then used by your application.
 //
 // Service Api documentation may be found at:
 // https://developers.docusign.com/esign-rest-api/reference/Templates
@@ -495,7 +495,7 @@ func (op *DocumentsListOp) IncludeTabs(val string) *DocumentsListOp {
 	return op
 }
 
-// DocumentsUpdate adds a document to a template document.
+// DocumentsUpdate updates a template document.
 //
 // https://developers.docusign.com/esign-rest-api/reference/templates/templatedocuments/update
 //
@@ -553,7 +553,7 @@ func (op *DocumentsUpdateListOp) Do(ctx context.Context) (*model.TemplateDocumen
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// LocksCreate lock a template.
+// LocksCreate locks a template.
 //
 // https://developers.docusign.com/esign-rest-api/reference/templates/templatelocks/create
 //
@@ -726,7 +726,7 @@ func (op *RecipientTabsListOp) Do(ctx context.Context) (*model.Tabs, error) {
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// IncludeAnchorTabLocations when set to **true**, all tabs with anchor tab properties are included in the response. If you do not specify this parameter, the effect is the default behavior (**false**).
+// IncludeAnchorTabLocations when set to **true**, all tabs with anchor tab properties are included in the response. The default value is **false**.
 func (op *RecipientTabsListOp) IncludeAnchorTabLocations() *RecipientTabsListOp {
 	if op != nil {
 		op.QueryOpts.Set("include_anchor_tab_locations", "true")
@@ -792,7 +792,9 @@ func (op *RecipientsCreateOp) Do(ctx context.Context) (*model.Recipients, error)
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// ResendEnvelope when set to **true**, resends the   envelope if the new recipient's routing order is before or the same as the envelope's next recipient.
+// ResendEnvelope when set to **true**, resends the envelope to the recipients that you specify in the request body. You use this parameter to resend the envelope to a recipient who deleted the original email notification.
+//
+// **Note**: Correcting an envelope is a different process. DocuSign always resends an envelope when you correct it, regardless of the value that you enter here.
 func (op *RecipientsCreateOp) ResendEnvelope() *RecipientsCreateOp {
 	if op != nil {
 		op.QueryOpts.Set("resend_envelope", "true")
@@ -923,7 +925,9 @@ func (op *RecipientsUpdateOp) Do(ctx context.Context) (*model.RecipientsUpdateSu
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// ResendEnvelope when set to **true**, resends the   envelope if the new recipient's routing order is before or the same as the envelope's next recipient.
+// ResendEnvelope when set to **true**, resends the envelope to the recipients that you specify in the request body. You use this parameter to resend the envelope to a recipient who deleted the original email notification.
+//
+// **Note**: Correcting an envelope is a different process. DocuSign always resends an envelope when you correct it, regardless of the value that you enter here.
 func (op *RecipientsUpdateOp) ResendEnvelope() *RecipientsUpdateOp {
 	if op != nil {
 		op.QueryOpts.Set("resend_envelope", "true")
@@ -931,7 +935,7 @@ func (op *RecipientsUpdateOp) ResendEnvelope() *RecipientsUpdateOp {
 	return op
 }
 
-// ViewsCreateEdit provides a URL to start an edit view of the Template UI
+// ViewsCreateEdit gets a URL for a template edit view.
 //
 // https://developers.docusign.com/esign-rest-api/reference/templates/templateviews/createedit
 //
@@ -1056,14 +1060,15 @@ func (op *GetOp) Do(ctx context.Context) (*model.EnvelopeTemplate, error) {
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// Include is a comma-separated list of additional template attributes to include in the response. Valid values are:
+// Include is a comma-separated list
+// of additional template attributes
+// to include in the response.
+// Valid values are:
 //
-// - `recipients`
-// - `folders`
-// - `documents`
-// - `custom_fields`
-// - `notifications`
-// - `powerforms`
+// - `powerforms`: Includes information about PowerForms.
+// - `tabs`: Includes information about tabs.
+// - `documents`: Includes information about documents.
+// - `favorite_template_status`: : Includes the template `favoritedByMe` property in the response. **Note**: You can mark a template as a favorite only in eSignature v2.1.
 func (op *GetOp) Include(val ...string) *GetOp {
 	if op != nil {
 		op.QueryOpts.Set("include", strings.Join(val, ","))
@@ -1232,7 +1237,7 @@ func (op *GetPageImagesOp) StartPosition(val int) *GetPageImagesOp {
 	return op
 }
 
-// List gets the definition of a template.
+// List gets template definitions.
 //
 // https://developers.docusign.com/esign-rest-api/reference/templates/templates/list
 //
@@ -1256,7 +1261,7 @@ func (op *ListOp) Do(ctx context.Context) (*model.EnvelopeTemplateResults, error
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// Count number of records to return in the cache.
+// Count is the number of records to return in the cache.
 func (op *ListOp) Count(val int) *ListOp {
 	if op != nil {
 		op.QueryOpts.Set("count", fmt.Sprintf("%d", val))
@@ -1264,7 +1269,7 @@ func (op *ListOp) Count(val int) *ListOp {
 	return op
 }
 
-// CreatedFromDate list templates created on or after this date.
+// CreatedFromDate lists templates created on or after this date.
 func (op *ListOp) CreatedFromDate(val string) *ListOp {
 	if op != nil {
 		op.QueryOpts.Set("created_from_date", val)
@@ -1272,7 +1277,7 @@ func (op *ListOp) CreatedFromDate(val string) *ListOp {
 	return op
 }
 
-// CreatedToDate list templates modified before this date.
+// CreatedToDate lists templates modified before this date.
 func (op *ListOp) CreatedToDate(val string) *ListOp {
 	if op != nil {
 		op.QueryOpts.Set("created_to_date", val)
@@ -1280,7 +1285,7 @@ func (op *ListOp) CreatedToDate(val string) *ListOp {
 	return op
 }
 
-// FolderIds is a comma separated list of folder ID GUIDs.
+// FolderIds is a comma-separated list of folder id GUIDs.
 func (op *ListOp) FolderIds(val ...string) *ListOp {
 	if op != nil {
 		op.QueryOpts.Set("folder_ids", strings.Join(val, ","))
@@ -1314,19 +1319,10 @@ func (op *ListOp) FromDate(val time.Time) *ListOp {
 // to include in the response.
 // Valid values are:
 //
-// - `advanced_templates`
-// - `custom_fields`
-// - `documents`
-// - `folders`
-// - `notifications`
-// - `pathExtended`
-// - `powerforms`
-// - `recipients`
-// - `shared_template_folders`
-//
-// `pathExtended`: Includes SalesForce configuration data for merge fields
-// that can be used to optimize upload template
-// by eliminating the need to connect to SalesForce.
+// - `powerforms`: Includes information about PowerForms.
+// - `tabs`: Includes information about tabs.
+// - `documents`: Includes information about documents.
+// - `favorite_template_status`: : Includes the template `favoritedByMe` property in the response. **Note**: You can mark a template as a favorite only in eSignature v2.1.
 func (op *ListOp) Include(val ...string) *ListOp {
 	if op != nil {
 		op.QueryOpts.Set("include", strings.Join(val, ","))
@@ -1432,7 +1428,9 @@ func (op *ListOp) TemplateIds(val string) *ListOp {
 	return op
 }
 
-// ToDate end of the search date range. Only returns templates created up to this date/time. If no value is provided, this defaults to the current date.
+// ToDate is the end of a search date range in UTC DateTime format. When you use this parameter, only templates created up to this date and time are returned.
+//
+// **Note**: If this property is null, the value defaults to the current date.
 func (op *ListOp) ToDate(val time.Time) *ListOp {
 	if op != nil {
 		op.QueryOpts.Set("to_date", val.Format(time.RFC3339))
@@ -1525,7 +1523,7 @@ func (op *UpdateOp) Do(ctx context.Context) (*model.TemplateUpdateSummary, error
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// UpdateGroupShare shares a template with a group
+// UpdateGroupShare shares a template with a group.
 //
 // https://developers.docusign.com/esign-rest-api/reference/templates/templates/updategroupshare
 //

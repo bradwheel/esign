@@ -457,6 +457,7 @@ func GetFieldOverrides() map[string]map[string]string {
 			"includeDocumentFields":             "DSBool",
 			"includeDocuments":                  "DSBool",
 			"includeEnvelopeVoidReason":         "DSBool",
+			"includeHMAC":                       "DSBool",
 			"includeSenderAccountAsCustomField": "DSBool",
 			"includeTimeZone":                   "DSBool",
 			"loggingEnabled":                    "DSBool",

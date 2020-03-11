@@ -15,7 +15,7 @@
 // * Branding the account with custom colors, message text, and more.
 // * Account charges.
 //
-// The Account category also includes end points for listing the recipient names associated with an email address that was used by the account. For example, a single email address is often shared by mulitple members of a family.
+// The Accounts category also includes end points for listing the recipient names associated with an email address that was used by the account. For example, a single email address is often shared by multiple members of a family.
 //
 // Service Api documentation may be found at:
 // https://developers.docusign.com/esign-rest-api/reference/Accounts
@@ -187,7 +187,7 @@ func (op *BrandsGetOp) IncludeLogos() *BrandsGetOp {
 	return op
 }
 
-// BrandsGetExportFile export a brand.
+// BrandsGetExportFile exports a brand.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accountbrands/getexportfile
 //
@@ -506,7 +506,7 @@ func (op *ConsumerDisclosuresUpdateOp) IncludeMetadata(val string) *ConsumerDisc
 	return op
 }
 
-// CustomFieldsCreate creates an acount custom field.
+// CustomFieldsCreate creates an account custom field.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accountcustomfields/create
 //
@@ -531,7 +531,7 @@ func (op *CustomFieldsCreateOp) Do(ctx context.Context) (*model.CustomFields, er
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// ApplyToTemplates set the call query parameter apply_to_templates
+// ApplyToTemplates (Optional) When set to **true**, the new custom field is applied to all of the templates on the account.
 func (op *CustomFieldsCreateOp) ApplyToTemplates() *CustomFieldsCreateOp {
 	if op != nil {
 		op.QueryOpts.Set("apply_to_templates", "true")
@@ -539,7 +539,7 @@ func (op *CustomFieldsCreateOp) ApplyToTemplates() *CustomFieldsCreateOp {
 	return op
 }
 
-// CustomFieldsDelete delete an existing account custom field.
+// CustomFieldsDelete deletes an account custom field.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accountcustomfields/delete
 //
@@ -570,7 +570,7 @@ func (op *CustomFieldsDeleteOp) ApplyToTemplates() *CustomFieldsDeleteOp {
 	return op
 }
 
-// CustomFieldsList gets a list of custom fields associated with the account.
+// CustomFieldsList gets a list of custom fields.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accountcustomfields/list
 //
@@ -594,7 +594,7 @@ func (op *CustomFieldsListOp) Do(ctx context.Context) (*model.CustomFields, erro
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// CustomFieldsUpdate updates an existing account custom field.
+// CustomFieldsUpdate updates an account custom field.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accountcustomfields/update
 //
@@ -627,7 +627,7 @@ func (op *CustomFieldsUpdateOp) ApplyToTemplates() *CustomFieldsUpdateOp {
 	return op
 }
 
-// PasswordRulesGet get the password rules
+// PasswordRulesGet gets the password rules for an account.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accountpasswordrules/get
 //
@@ -651,7 +651,7 @@ func (op *PasswordRulesGetOp) Do(ctx context.Context) (*model.AccountPasswordRul
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// PasswordRulesGetForUser get membership account password rules
+// PasswordRulesGetForUser gets membership account password rules.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accountpasswordrules/getforuser
 //
@@ -675,7 +675,7 @@ func (op *PasswordRulesGetForUserOp) Do(ctx context.Context) (*model.UserPasswor
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// PasswordRulesUpdate update the password rules
+// PasswordRulesUpdate updates the password rules for an account.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accountpasswordrules/update
 //
@@ -860,7 +860,7 @@ func (op *PermissionProfilesUpdateOp) Include(val ...string) *PermissionProfiles
 	return op
 }
 
-// SignatureProvidersList returns Account available signature providers for specified account.
+// SignatureProvidersList gets the available signature providers for an account.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accountsignatureproviders/list
 //
@@ -1180,7 +1180,7 @@ func (op *GetProvisioningOp) Do(ctx context.Context) (*model.ProvisioningInforma
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// ListRecipientNamesByEmail gets recipient names associated with an email address.
+// ListRecipientNamesByEmail gets the recipient names associated with an email address.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accounts/listrecipientnamesbyemail
 //
@@ -1204,7 +1204,7 @@ func (op *ListRecipientNamesByEmailOp) Do(ctx context.Context) (*model.Recipient
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// Email is the email address for the user
+// Email is the email address for which you want to retrieve recipient names.
 func (op *ListRecipientNamesByEmailOp) Email(val string) *ListRecipientNamesByEmailOp {
 	if op != nil {
 		op.QueryOpts.Set("email", val)
@@ -1343,7 +1343,7 @@ func (op *ListSharedAccessOp) UserIds(val ...string) *ListSharedAccessOp {
 	return op
 }
 
-// ListSupportedLanguages list supported languages for the recipient language setting
+// ListSupportedLanguages gets the supported languages for envelope recipients.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/accounts/listsupportedlanguages
 //
@@ -1539,7 +1539,7 @@ func (op *ENoteConfigurationsUpdateOp) Do(ctx context.Context) (*model.ENoteConf
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// PaymentGatewayAccountsList list payment gateway account information
+// PaymentGatewayAccountsList list payment gateway accounts
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/paymentgatewayaccounts/list
 //
@@ -1585,7 +1585,7 @@ func (op *SealProvidersListOp) Do(ctx context.Context) (*model.AccountSeals, err
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// IdentityVerificationsList retrieves the list of identity verification workflows available to an account
+// IdentityVerificationsList retrieves the Identity Verification workflows available to an account.
 //
 // https://developers.docusign.com/esign-rest-api/reference/accounts/identityverifications/list
 //

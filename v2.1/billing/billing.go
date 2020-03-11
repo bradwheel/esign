@@ -143,7 +143,7 @@ func (op *PlansGetCreditCardOp) Do(ctx context.Context) (*model.CreditCardInform
 	return res, ((*esign.Op)(op)).Do(ctx, &res)
 }
 
-// PlansList gets the list of available billing plans.
+// PlansList gets a list of available billing plans.
 //
 // https://developers.docusign.com/esign-rest-api/reference/billing/billingplans/list
 //
@@ -191,7 +191,7 @@ func (op *PlansPurchaseEnvelopesOp) Do(ctx context.Context) error {
 	return ((*esign.Op)(op)).Do(ctx, nil)
 }
 
-// PlansUpdate updates the account billing plan.
+// PlansUpdate updates an account billing plan.
 //
 // https://developers.docusign.com/esign-rest-api/reference/billing/billingplans/update
 //

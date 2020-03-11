@@ -31,7 +31,7 @@ var (
 	baseDir     = flag.String("src", ".", "src directory")
 	templDir    = flag.String("template", "gen-esign/templates", "directory containing output templates.")
 	buildFlag   = flag.Bool("build", false, "Compile generated packages.")
-	swaggerFile = flag.String("swagger_file", "gen-esign/esignature.rest.swagger-v2.1.json,gen-esign/esignature.rest.swagger.json", "If non-empty, comma separated list to local files containing the API version definitions.")
+	swaggerFile = flag.String("swagger_file", "gen-esign/esignature.rest.swagger-v2.1.json,gen-esign/esignature.rest.swagger-v2.json", "If non-empty, comma separated list to local files containing the API version definitions.")
 	skipFormat  = flag.Bool("skip_format", false, "skip gofmt command")
 )
 

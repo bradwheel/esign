@@ -74,14 +74,16 @@ func (op *GetOp) Count(val int) *GetOp {
 	return op
 }
 
-// Include specifies which entries are included in the response. Multiple entries can be included by using commas in the query string (example: ?include="failed,queued")
+// Include specifies which entries are included in the response. You can include multiple entries by using commas in the query string.
+//
+// Example: `?include="failed,queued"`
 //
 // Valid values:
-// * all - Returns all entries. If present, overrides all other query settings. This is the default if no query string is provided.
-// * failed - Entries with a failed status.
-// * processing - Entries with a processing status.
-// * queued - Entries with a queued status.
-// * sent - Entries with a sent status.
+// * `all`: Returns all entries. If present, overrides all other query settings. This is the default if no query string is provided.
+// * `failed`: Entries with a failed status.
+// * `processing`: Entries with a processing status.
+// * `queued`: Entries with a queued status.
+// * `sent`: Entries with a sent status.
 func (op *GetOp) Include(val ...string) *GetOp {
 	if op != nil {
 		op.QueryOpts.Set("include", strings.Join(val, ","))
@@ -128,14 +130,18 @@ func (op *ListOp) Count(val int) *ListOp {
 	return op
 }
 
-// Include specifies which entries are included in the response. Multiple entries can be included by using commas in the query string (example: ?include="failed,queued")
+// Include specifies which entries are included in the response. You can include multiple entries by using commas in the query string.
+//
+// Example: `?include="failed,queued"`
 //
 // Valid values:
-// * all - Returns all entries. If present, overrides all other query settings. This is the default if no query string is provided.
-// * failed - Entries with a failed status.
-// * processing - Entries with a processing status.
-// * queued - Entries with a queued status.
-// * sent - Entries with a sent status.
+// * `all`: Returns all entries. If present, overrides all other query settings.
+// * `failed`: Returns entries with a `failed` status.
+// * `processing`: Returns entries with a `processing` status.
+// * `queued`: Returns entries with a `queued` status.
+// * `sent`: Returns entries with a `sent` status.
+//
+// **Note**: If you do not provide a query string, no envelopes are included.
 func (op *ListOp) Include(val ...string) *ListOp {
 	if op != nil {
 		op.QueryOpts.Set("include", strings.Join(val, ","))
@@ -219,7 +225,7 @@ func (op *RecipientsListOp) StartPosition(val int) *RecipientsListOp {
 // https://developers.docusign.com/esign-rest-api/v2/reference/bulkenvelopes/envelopebulkrecipients/update
 //
 // SDK Method BulkEnvelopes::updateRecipients
-func (s *Service) RecipientsUpdate(envelopeID string, recipientID string, bulkRecipientsRequest *model.BulkRecipientsRequest) *RecipientsUpdateOp {
+func (s *Service) RecipientsUpdate(envelopeID string, recipientID string, bulkRecipientsRequest []byte) *RecipientsUpdateOp {
 	return &RecipientsUpdateOp{
 		Credential: s.credential,
 		Method:     "PUT",

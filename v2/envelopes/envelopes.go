@@ -1689,6 +1689,22 @@ func (op *CreateOp) MergeRolesOnDraft() *CreateOp {
 	return op
 }
 
+// TabLabelExactMatches reserved for DocuSign.
+//
+// <!--
+// Note from Kate Dougherty: This functionality has not been released yet. When it is (contact Alia Paddock with any questions), use the following description:
+//
+// "When set to **true**, each tab in the inline template is matched and collapsed with all qualified tabs in the server template. When set to **false** (default), each tab in the inline template is matched and collapsed with at most one qualified tab in the server template.
+//
+// This parameter applies when you create an envelope from a composite template."
+// -->
+func (op *CreateOp) TabLabelExactMatches(val string) *CreateOp {
+	if op != nil {
+		op.QueryOpts.Set("tab_label_exact_matches", val)
+	}
+	return op
+}
+
 // DeleteDocumentPage deletes a page from a document in an envelope.
 //
 // https://developers.docusign.com/esign-rest-api/v2/reference/envelopes/envelopes/deletedocumentpage

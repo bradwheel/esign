@@ -215,9 +215,8 @@ func (s *Service) MoveEnvelopes(folderID string, foldersRequest *model.FoldersRe
 type MoveEnvelopesOp esign.Op
 
 // Do executes the op.  A nil context will return error.
-func (op *MoveEnvelopesOp) Do(ctx context.Context) (*model.FoldersResponse, error) {
-	var res *model.FoldersResponse
-	return res, ((*esign.Op)(op)).Do(ctx, &res)
+func (op *MoveEnvelopesOp) Do(ctx context.Context) error {
+	return ((*esign.Op)(op)).Do(ctx, nil)
 }
 
 // Search gets a list of envelopes in folders matching the specified criteria.
