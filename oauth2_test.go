@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/jfcote87/esign"
+	"github.com/bradwheel/esign"
 	"github.com/jfcote87/oauth2"
 	"github.com/jfcote87/testutils"
 )

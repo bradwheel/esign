@@ -22,10 +22,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/bradwheel/esign"
+	"github.com/bradwheel/esign/v2.1/folders"
+	"github.com/bradwheel/esign/v2.1/templates"
 	"github.com/jfcote87/ctxclient"
-	"github.com/jfcote87/esign"
-	"github.com/jfcote87/esign/v2.1/folders"
-	"github.com/jfcote87/esign/v2.1/templates"
 	"github.com/jfcote87/oauth2"
 	"github.com/jfcote87/testutils"
 )

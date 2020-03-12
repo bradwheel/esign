@@ -1,4 +1,4 @@
-module github.com/jfcote87/esign
+module github.com/bradwheel/esign
 
 require (
 	cloud.google.com/go v0.43.0 // indirect

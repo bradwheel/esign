@@ -1,6 +1,6 @@
 # DocuSign eSignature RestApi v2 and v2.1(Beta) for Go
 
-[![GoDoc](https://godoc.org/github.com/jfcote87/esign?status.svg)](https://godoc.org/github.com/jfcote87/esign)
+[![GoDoc](https://godoc.org/github.com/bradwheel/esign?status.svg)](https://godoc.org/github.com/bradwheel/esign)
 
 esign provides Go packages for interacting with DocuSign's eSignature RestApi and
 has been created using the lastest published swagger definition.
@@ -55,9 +55,9 @@ executed via a Do(context.Context) function.  A context must be passwed for all 
 Create envelope
 
 ```go
-    import "github.com/jfcote87/esign"
-    import "github.com/jfcote87/esign/v2/envelope"
-    import "github.com/jfcote87/esign/v2/model"
+    import "github.com/bradwheel/esign"
+    import "github.com/bradwheel/esign/v2/envelope"
+    import "github.com/bradwheel/esign/v2/model"
 
     sv := envelopes.New(credential)
 

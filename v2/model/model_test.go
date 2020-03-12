@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/jfcote87/esign/v2/model"
+	"github.com/bradwheel/esign/v2/model"
 )
 
 func TestDSBool(t *testing.T) {
